@@ -1,8 +1,5 @@
 // Array of special characters to be included in password
-var specialCharacters = ['@','%',
-  '+',
-  '\\',
-  '/',
+var specialCharacters = ['@', '%', '+', '\\', '/',
   "'",
   '!',
   '#',
@@ -92,21 +89,44 @@ var generateBtn = document.querySelector("#generate");
 function writePassword() {
   var password = generatePassword();
   var passwordText = document.querySelector("#password");
-
+  
   passwordText.value = password;
+
 }
 
 function generatePassword() {
   var options = getPasswordOptions();
+  return options
 
 }
 
 function getPasswordOptions() {
-  var length = parseInt(prompt = "How many characters your password will be?");
-  
 
-  var hasSpecialCharacters = confirm("Click ok to confirm special characters");
+  confirm("Minimum characters for password is 8");
+  var length = parseInt(prompt("How Many Characters"));
+  if (length >= 8 && length <= 128) {
+    var hasSpecialCharacters = confirm("Click ok to confirm special characters");
+    
+    
+    var rando = Math.floor(Math.random() * length);
+
+    return (specialCharacters[rando]);
+
+  }
+  else {
+
+    confirm("Invalid amount");
+  }
+
 }
+
+// var hasNumericCharacters = confirm("Click ok to confirm numeric characters");
+// var hasLowerCaseCharacters = confirm("Click ok to confirm lower case characters");
+// var hasUpperCaseCharacters = confirm("Click ok to confirm upper case characters");
+
+
 
 // Add event listener to generate button
 generateBtn.addEventListener("click", writePassword);
+
+
