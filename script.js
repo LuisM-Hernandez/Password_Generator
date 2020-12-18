@@ -81,38 +81,66 @@ var upperCasedCharacters = [
 ];
 
 
+var answer = [];
 
-// Assignment Code
+var hasSpecialCharacters;
+var hasLowerCaseCharacters;
+var hasUpperCaseCharacters;
+var hasNumericCharacters;
+
+var confirmation;
+
+
+// Create variable to select the id generate on our html (button)
 var generateBtn = document.querySelector("#generate");
 
-// Write password to the #password input
+
 function writePassword() {
+  
   var password = generatePassword();
+  
   var passwordText = document.querySelector("#password");
   
   passwordText.value = password;
-
+ 
 }
 
 function generatePassword() {
+ 
   var options = getPasswordOptions();
+  
   return options
 
 }
 
 function getPasswordOptions() {
 
-  confirm("Minimum characters for password is 8");
-  var length = parseInt(prompt("How Many Characters"));
-  if (length >= 8 && length <= 128) {
-    var hasSpecialCharacters = confirm("Click ok to confirm special characters");
-    
-    
-    var rando = Math.floor(Math.random() * length);
+  
+  confirm("Create a password");
 
-    return (specialCharacters[rando]);
+  var quantity = parseInt(prompt("Choose from 8 to 128 characters"));
+
+  if (quantity >= 8 && quantity <= 128) {
+    
+       hasSpecialCharacters = confirm("Click ok to confirm special characters");
+       hasNumericCharacters = confirm("Click ok to confirm numeric characters");
+       hasLowerCaseCharacters = confirm("Click ok to confirm lower case characters");
+       hasUpperCaseCharacters = confirm("Click ok to confirm upper case characters");
+
+    for (var i = 0; i < quantity; i++){
+     
+      var random = specialCharacters[Math.floor(Math.random() * specialCharacters.length)];
+      answer.push(random);
+      console.log(random); 
+    }
+
+   
+    var password = answer.join("");
+  
+    return password;
 
   }
+
   else {
 
     confirm("Invalid amount");
@@ -120,13 +148,10 @@ function getPasswordOptions() {
 
 }
 
-// var hasNumericCharacters = confirm("Click ok to confirm numeric characters");
-// var hasLowerCaseCharacters = confirm("Click ok to confirm lower case characters");
-// var hasUpperCaseCharacters = confirm("Click ok to confirm upper case characters");
-
-
-
 // Add event listener to generate button
 generateBtn.addEventListener("click", writePassword);
+
+
+
 
 
